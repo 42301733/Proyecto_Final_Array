@@ -29,7 +29,7 @@ public class loginController {
     @FXML
     private Label lblError;
 
-    // Vinculado al botón de ingresar; evalúa credenciales y gestiona el acceso
+    // Evalúa credenciales sin revelar cuál campo es el erróneo
     @FXML
     protected void validarUsuario() {
 
@@ -50,7 +50,7 @@ public class loginController {
         // Inicio de sesión exitoso: abre la galería y cierra el login
         if (usuarioCorrecto && passwordCorrecto) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/laboratorio/galeriadeimagenesarreglos/galeria-view.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("galeria-view.fxml"));
                 Parent root = loader.load();
 
                 Stage stage = new Stage();
@@ -68,18 +68,13 @@ public class loginController {
             }
             return;
         }
-
-        // Manejo de errores por si el login tiene datos incorrectos
+        //Mensaje de error si la contraseña es incorrecta
         lblError.setVisible(true);
-
         lblError.setText("Usuario y/o contraseña incorrectos");
 
+        // Limpieza y reasignación de foco al primer campo
         txtLoginUsuario.clear();
-
         pswLoginPassword.clear();
-
-        txtLoginUsuario.requestFocus();
-
         txtLoginUsuario.requestFocus();
     }
 }

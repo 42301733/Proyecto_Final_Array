@@ -16,6 +16,13 @@ import javafx.stage.Stage;
  * @author Jorge
  * @author Adrian
  */
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+
 public class visorController {
 
     @FXML
@@ -43,88 +50,60 @@ public class visorController {
 
     private int posicionActual;
 
-    public void iniciarDatos(
-            Imagen[] imagenes,
-            int posicion
-    ) {
-
+    //Recibe el arreglo de imágenes y la posición seleccionada
+    public void iniciarDatos(Imagen[] imagenes, int posicion) {
         this.imagenes = imagenes;
-
         this.posicionActual = posicion;
-
         mostrarImagen();
-
     }
 
+    //Carga la imagen actual y actualiza las etiquetas con sus datos
     private void mostrarImagen() {
-
         try {
-
-            Image imagen=new Image(getClass().getResourceAsStream(imagenes[posicionActual].getRuta()));
-
+            Image imagen = new Image(getClass().getResourceAsStream(imagenes[posicionActual].getRuta()));
             imgGrande.setImage(imagen);
-
             imgGrande.setPreserveRatio(true);
-
             imgGrande.setFitWidth(1200);
-
             imgGrande.setFitHeight(700);
 
             lblTitulo.setText(imagenes[posicionActual].getTitulo());
-
-            lblMB.setText(imagenes[posicionActual].getTamanoenMB()+ " MB");
-
+            lblMB.setText(imagenes[posicionActual].getTamanoenMB() + " MB");
             lblCategoria.setText(imagenes[posicionActual].getCategoria());
-
-            lblBytes.setText("Bytes: "+ imagenes[posicionActual].getTamanoenBytes());
-
+            lblBytes.setText("Bytes: " + imagenes[posicionActual].getTamanoenBytes());
             lblFecha.setText(imagenes[posicionActual].getFecha().toString());
-
-        } catch(Exception e){
-
+        } catch (Exception e) {
             e.printStackTrace();
-
         }
-
     }
 
+    //Pasa a la siguiente imagen (regresa a 0 si llega al final)
     @FXML
-    private void siguienteImagen(){
-
+    private void siguienteImagen() {
         posicionActual++;
 
-        if(posicionActual>=imagenes.length){
-
-            posicionActual=0;
-
+        if (posicionActual >= imagenes.length) {
+            posicionActual = 0;
         }
 
         mostrarImagen();
-
     }
 
+    //Retrocede a la imagen anterior (va al final si baja de 0)
     @FXML
-    private void anteriorImagen(){
-
+    private void anteriorImagen() {
         posicionActual--;
 
-        if(posicionActual<0){
-
-            posicionActual=
-            imagenes.length-1;
-
+        if (posicionActual < 0) {
+            posicionActual = imagenes.length - 1;
         }
 
         mostrarImagen();
-
     }
 
+    //Cierra la ventana actual del visor
     @FXML
-    private void cerrarVisor(){
-
-        Stage stage=(Stage)btnCerrar.getScene().getWindow();
-
+    private void cerrarVisor() {
+        Stage stage = (Stage) btnCerrar.getScene().getWindow();
         stage.close();
-
     }
 }

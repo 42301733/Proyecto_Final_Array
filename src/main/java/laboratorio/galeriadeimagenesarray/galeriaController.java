@@ -129,12 +129,6 @@ public class galeriaController {
             // Clase CSS
             tarjeta.getStyleClass().add("tarjeta");
 
-            // Efecto hover al pasar el mouse
-            tarjeta.setOnMouseEntered(event -> tarjeta.getStyleClass().add("imagenSeleccionada"));
-
-            // Remueve el efecto hover
-            tarjeta.setOnMouseExited(event -> tarjeta.getStyleClass().remove("imagenSeleccionada"));
-
             // Guarda posición de la imagen seleccionada
             int posicionEnGaleria = cantidad;
 
@@ -202,10 +196,7 @@ public class galeriaController {
             // Crea la escena
             Scene scene = new Scene(root);
 
-            // Fondo transparente
-            scene.setFill(null);
-
-            // Asigna escena
+            //Pone la escena
             stage.setScene(scene);
 
             // Maximiza ventana
